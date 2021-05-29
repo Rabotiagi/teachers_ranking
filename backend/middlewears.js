@@ -5,6 +5,8 @@ export function requestTime(req, res, next){
 
 export function logger(req, res, next){
     console.log(`request time: ${req.requestTime}`);
-    console.log(req.path, '\n');
+    console.log(req.path);
+    console.dir(req.query);
+    console.dir(req.body);
     next();
 }
