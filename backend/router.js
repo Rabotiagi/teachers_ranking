@@ -23,7 +23,6 @@ router.get('/registration', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    console.log(req.body);
     console.log(req.query);
 });
 
