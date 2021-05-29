@@ -1,3 +1,5 @@
+'use strict';
+
 import {Router} from 'express';
 import path from 'path';
 
@@ -18,6 +20,11 @@ router.get('/login', (req, res) => {
 
 router.get('/registration', (req, res) => {
     res.sendFile(path.resolve(dirname, '../static', 'registration.html'));
+});
+
+router.post('/login', (req, res) => {
+    console.log(req.body);
+    console.log(req.query);
 });
 
 export default router;

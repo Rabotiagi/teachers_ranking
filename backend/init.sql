@@ -15,7 +15,7 @@ CREATE TABLE AppUser(
 
 CREATE TABLE Votes(
     teacher_id integer REFERENCES Teacher(id),
-    feature varchar(100),
+    feature integer ,
     points integer,
     countvote integer
 );

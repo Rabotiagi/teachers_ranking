@@ -1,6 +1,8 @@
 import express from 'express';
 import path from 'path';
 import router from './router.js';
+'use strict';
+
 import {logger, requestTime} from './middlewears.js';
 
 const app = express();
