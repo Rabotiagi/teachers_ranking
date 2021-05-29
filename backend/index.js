@@ -6,15 +6,13 @@ import router from './router.js';
 import {logger, requestTime} from './middlewears.js';
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 const dirname = path.resolve();
 
-app.use(express.static(path.resolve(dirname, '../static')));
+app.use(express.static(path.resolve(dirname, '../static/')));
 app.use(requestTime);
 app.use(logger);
 app.use(router);
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
 
 app.listen(PORT, () => {
     console.log('server was started');

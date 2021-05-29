@@ -27,4 +27,8 @@ router.post('/login', (req, res) => {
     console.log(req.query);
 });
 
+router.get('/script.js', (req, res) => {
+    res.sendFile(path.resolve(dirname, '../', 'script.js'));
+});
+
 export default router;
