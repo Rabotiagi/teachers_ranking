@@ -6,7 +6,7 @@ import router from './router.js';
 import {logger, requestTime} from './middlewears.js';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 const dirname = path.resolve();
 
 app.use(express.static(path.resolve(dirname, '../static')));

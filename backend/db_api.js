@@ -10,7 +10,8 @@ class DB{
             port: 5432,
             database: 'app',
             user: 'artem',
-            password: '27778336'
+            password: '27778336',
+            idleTimeoutMillis: 1000
         });
     }
 
@@ -62,12 +63,88 @@ class DB{
         return false;
     }
 
-    async addGrades(id_teacher, grades){
-        const sql = 'SELECT ';
-        
-        new Promise(resolve => {
-            const sql1 = 'INSERT INTO Votes () values ()';
+    async getRows(id_teacher){
+        const sql = 'SELECT feature, points, countvote FROM Votes WHERE teacher_id=$1';
+        return this.pool.query(sql, [id_teacher]);
+    }
+
+    updatePoints(id_teacher, grades){
+        return new Promise(resolve => {
+            const sql = 'UPDATE Votes SET points=$1 WHERE (teacher_id=$2 AND feature=$3)';
+            for(let i = 0; i < grades.length; i++){
+                this.pool.query(sql, [grades[i], id_teacher, i + 1], err => {
+                    if(err) throw err;
+                });
+            }
+
+            resolve();
         });
+    }
+
+    updateCount(id_teacher, count){
+        return new Promise(resolve => {
+            const sql = 'UPDATE Votes SET countvote=$1 WHERE teacher_id=$2';
+            this.pool.query(sql, [count + 1, id_teacher], err => {
+                if(err) throw err;
+            });
+
+            resolve();
+        });
+    }
+
+    insertGrades(id_teacher, grades){
+        return new Promise(resolve => {
+            const sql = 'INSERT INTO Votes (teacher_id, feature, points, countvote) values ($1, $2, $3, 1)';
+            for(let i = 0; i < grades.length; i++){
+                this.pool.query(sql, [id_teacher, i + 1, grades[i]], err => {
+                    if(err) throw err;
+                });
+            }
+
+            resolve();
+        });
+    }
+
+    async addGrades(id_teacher, grades){
+        const {rows} = await this.getRows(id_teacher);
+        
+        if(rows.length){
+            for(let i = 0; i < grades.length; i++){
+                for(let j = 0; j < rows.length; j++){
+                    if(i + 1 === rows[j].feature){
+                        grades[i] += rows[j].points;
+                        break;
+                    }
+                }
+            }
+
+            console.log(grades);
+            await this.updatePoints(id_teacher, grades);
+            await this.updateCount(id_teacher, rows[1].countvote);
+            return;
+        }
+
+        await this.insertGrades(id_teacher, grades);
+    }
+
+    async getVotes(id_teacher){
+        const sql = 'SELECT feature, points, countvote FROM Votes WHERE teacher_id=$1';
+        const {rows} = await this.pool.query(sql, [id_teacher]);
+        console.log(rows);
+        let result = [];
+
+        for(let row of rows){
+            const grade = row.points / (row.countvote * 5);
+            result.push({feature: row.feature, grade: grade});
+        }
+        
+        return result;
+    }
+
+    async getTeachers(){
+        const sql = 'SELECT * FROM Teacher';
+        const {rows} = await this.pool.query(sql);
+        return rows;
     }
 
     closePool(){
@@ -77,9 +154,11 @@ class DB{
 
 (async () => {
     const db = new DB();
-    const pool = db.initPool();
-    await db.voted(pool, 'yar', 1);
-    pool.end();
+    db.initPool();
+    //db.addGrades(2, [1,2,3,4,5,4,3,2,1,1]);
+    const grades = await db.getTeachers();
+    console.log(grades);
+    db.closePool();
 })();
 
 export default DB;
