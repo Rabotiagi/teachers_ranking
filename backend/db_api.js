@@ -152,13 +152,6 @@ class DB{
     }
 }
 
-(async () => {
-    const db = new DB();
-    db.initPool();
-    //db.addGrades(2, [1,2,3,4,5,4,3,2,1,1]);
-    const grades = await db.getTeachers();
-    console.log(grades);
-    db.closePool();
-})();
+
 
 export default DB;
