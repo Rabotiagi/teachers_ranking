@@ -18,8 +18,15 @@ router.get('/list', (req, res) => {
     if(params.id){
         (async () => {
             const teachers = await db.getTeachers();
-            await db.addGrades(params.id, params.grades);
+            
+            const points = params.grades.split('');
+            for(let i = 0; i < points.length; i++){
+                points[i] = +points[i];
+            }
+            
+            await db.addGrades(params.id, points);
             res.render('teachers', { teachers });
+            setTimeout(() => db.closePool(), 1000);
         })();
     } else { 
         (async () => {
