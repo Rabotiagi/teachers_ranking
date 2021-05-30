@@ -1,4 +1,3 @@
-Arrtem, [30.05.21 05:03]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,12 +27,13 @@ Arrtem, [30.05.21 05:03]
                         </div>
                         <div class="descr">
                             Факультет: <%= teacher.faculty %>
+                            <br>
                             Предмет: <%= teacher.subject %>
                         </div>
                         <div class="rank">
                             Средний рейтинг: 0
                         </div>
-                        <button class="rate <%= teacher.id %>">
+                        <button class="rate" id="<%= teacher.id %>"">
                             Оценить
                         </button>
                     </div>
