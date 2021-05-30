@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const email = data.get('email');
         const password = data.get('password');
 
-        location.assign(`http://localhost:3006/login?email=${email}&&password=${password}`);
+        location.assign(`http://localhost:3000/login?email=${email}&&password=${password}`);
     });
 
 })

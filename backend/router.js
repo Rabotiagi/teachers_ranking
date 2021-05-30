@@ -13,29 +13,49 @@ router.get('/', (req, res) => {
 });
 
 router.get('/list', (req, res) => {
+    const voc = ['Умение вызвать и поддержать интерес аудитории:',
+                 'Содержательность излагаемого материала:',
+                 'Актуальность материала:',
+                 'Пунктуальность:',
+                 'Наличие четкого РСО:',
+                 'Информирование студенто:',
+                 'Предоставление вопросов для зачета/экзамена:',
+                 'Вежливость:',
+                 'Объективность оценивания:',
+                 'Насколько вы удовлетворены преподаванием предмета?:'];
+
     db.initPool();
     const params = req.query;
     if(params.id){
+        console.log(1);
         (async () => {
-            const teachers = await db.getTeachers();
-            for(let i = 0; i < teachers.length; i++){
-                teachers[i].grades = await db.getVotes(i + 1);
-            }
-
             const points = params.grades.split('');
             for(let i = 0; i < points.length; i++){
                 points[i] = +points[i];
             }
             
             await db.addGrades(params.id, points);
+
+            const teachers = await db.getTeachers();
+            for(let i = 0; i < teachers.length; i++){
+                const votes = await db.getVotes(i + 1);
+                votes.forEach(element => element.feature = voc[element.feature - 1]);
+                
+                teachers[i].grades = votes;
+            }
+
+            
             res.render('teachers', { teachers });
-            setTimeout(() => db.closePool(), 1000);
+            
         })();
     } else { 
         (async () => {
             const teachers = await db.getTeachers();
             for(let i = 0; i < teachers.length; i++){
-                teachers[i].grades = await db.getVotes(i + 1);
+                const votes = await db.getVotes(i + 1);
+                votes.forEach(element => element.feature = voc[element.feature - 1]);
+                
+                teachers[i].grades = votes;
             }
             res.render('teachers', { teachers });
             db.closePool();

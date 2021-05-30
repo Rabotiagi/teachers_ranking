@@ -90,7 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 str = str.split(',').join('');
                 console.log(str);
 
-                location.assign(`http://localhost:3006/list?rate=${str}&&name=${currentId}`);
+                location.assign(`http://localhost:3000/list?grades=${str}&&id=${currentId}`);
             } else {
                 warning.style.display = 'block';
             }
