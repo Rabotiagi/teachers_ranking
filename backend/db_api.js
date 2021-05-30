@@ -147,11 +147,27 @@ class DB{
         return rows;
     }
 
+    writeActive(email){
+        return new Promise(resolve => {
+            const sql = 'UPDATE Active SET user_email=$1';
+            this.pool.query(sql, [email], err => {
+                if(err) throw err;
+            });
+
+            resolve();
+        });
+    }
+
+    async readActive(){
+        const sql = 'SELECT * FROM Active';
+        const {rows} = await this.pool.query(sql);
+        return rows[0].user_email;
+    }
+
     closePool(){
         this.pool.end();
     }
 }
-
 
 
 export default DB;

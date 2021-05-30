@@ -94,6 +94,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log(str);
 
                 location.assign(`http://localhost:3006/list?grades=${str}&&id=${currentId}`);
+
             } else {
                 warning.style.display = 'block';
             }
