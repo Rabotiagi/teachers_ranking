@@ -4,7 +4,7 @@ import router from './router.js';
 import {logger, requestTime} from './middlewears.js';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const dirname = path.resolve();
 
 app.set('view engine', 'ejs');
