@@ -93,11 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 str = str.split(',').join('');
                 console.log(str);
 
-
                 location.assign(`http://localhost:3001/list?grades=${str}&&id=${currentId}`);
-
-                
-
 
             } else {
                 warning.style.display = 'block';
