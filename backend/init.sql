@@ -26,8 +26,13 @@ CREATE TABLE CheckVote(
     teacher_id integer REFERENCES Teacher(id)
 );
 
+CREATE TABLE Active(
+    user_email varchar(100)
+);
+
 INSERT INTO Teacher (fullname, subject, faculty, photo) values ('#1', 'Алгоритми и структуры данных', 'ФИВТ', '../static/ded.jpg');
 INSERT INTO Teacher (fullname, subject, faculty, photo) values ('#2', 'Висшая математика', 'ИПСА', '../static/ded.jpg');
 INSERT INTO Teacher (fullname, subject, faculty, photo) values ('#3', 'Дискретная математика', 'ФПМ', '../static/ded.jpg');
 INSERT INTO Teacher (fullname, subject, faculty, photo) values ('#4', 'Основы программирования', 'ФИВТ', '../static/ded.jpg');
 INSERT INTO Teacher (fullname, subject, faculty, photo) values ('#5', 'История науки и техники', 'ФЭЛ', '../static/ded.jpg');
+INSERT INTO Active (user_email) values ('1');

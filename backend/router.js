@@ -27,15 +27,8 @@ router.get('/list', (req, res) => {
     db.initPool();
     const params = req.query;
     if(params.id){
-        console.log(1);
+        
         (async () => {
-            const points = params.grades.split('');
-            for(let i = 0; i < points.length; i++){
-                points[i] = +points[i];
-            }
-            
-            await db.addGrades(params.id, points);
-
             const teachers = await db.getTeachers();
             for(let i = 0; i < teachers.length; i++){
                 const votes = await db.getVotes(i + 1);
@@ -44,9 +37,23 @@ router.get('/list', (req, res) => {
                 teachers[i].grades = votes;
             }
 
+            const active = await db.readActive();
+            const check = await db.checkVote(active, +params.id);
+            if(check){
+                console.log('no right for vote');
+                res.render('teachers', { teachers });
+                return;
+            }
+
+            const points = params.grades.split('');
+            for(let i = 0; i < points.length; i++){
+                points[i] = +points[i];
+            }
             
+            await db.addGrades(params.id, points);
+            await db.voted(active, params.id);
+
             res.render('teachers', { teachers });
-            
         })();
     } else { 
         (async () => {
@@ -70,30 +77,25 @@ router.get('/login', (req, res) => {
         (async () => {
             const check = await db.checkUser(params.email, params.password);
             if(check){
+                await db.writeActive(params.email);
                 res.sendFile(path.resolve(dirname, '../static', 'list.html'));
             } else {
                 res.sendFile(path.resolve(dirname, '../static', 'login.html'));
             }
-
-            db.closePool();
         })();
     } else {
         res.sendFile(path.resolve(dirname, '../static', 'login.html'));
     }
-
-    
 });
 
 router.get('/registration', (req, res) => {
     db.initPool();
     const params = req.query;
     if(params.email){
-        console.log(1);
         (async () => {
             await db.createUser(params.email, params.password);
             res.sendFile(path.resolve(dirname, '../static', 'list.html'));
-
-            db.closePool();
+            db.writeActive();
         })();
     } else {
         res.sendFile(path.resolve(dirname, '../static', 'registration.html'));
