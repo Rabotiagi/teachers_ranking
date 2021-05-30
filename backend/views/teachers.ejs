@@ -1,3 +1,4 @@
+Arrtem, [30.05.21 05:03]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,22 +18,22 @@
         <div class="container">
             <div class="row">
 
-                <% teacher.forEach(function(teachers) { %>
+                <% teachers.forEach(function(teacher) { %>
                     <div class="col-md-4 offset-md-0">
                         <div class="img_wrapper">
-                            <img src="<%= photo %>" alt="photo" class="photo">
+                            <img src="<%= teacher.photo %>" alt="photo" class="photo">
                         </div>                    
                         <div class="name">
-                            <%= name %>
+                            <%= teacher.fullname %>
                         </div>
                         <div class="descr">
-                            Факультет: <%= faculty %>
-                            Предмет: <%= subject %>
+                            Факультет: <%= teacher.faculty %>
+                            Предмет: <%= teacher.subject %>
                         </div>
                         <div class="rank">
                             Средний рейтинг: 0
                         </div>
-                        <button class="rate">
+                        <button class="rate <%= teacher.id %>">
                             Оценить
                         </button>
                     </div>
@@ -149,8 +150,6 @@
         </div>            
     </section>
 
-
+    <script src="../../script.js"></script>
 </body>
 </html>
-
-

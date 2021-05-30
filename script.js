@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const parentStars = document.querySelectorAll('.stars');
     const stars = document.querySelectorAll('.star');
     const warning = document.querySelector('.error');
+    let currentId;
 
 
     function findIndex(arr, elem) {
@@ -83,11 +84,12 @@ window.addEventListener('DOMContentLoaded', () => {
             if (findIndex(marks, 0) === undefined) {
                 warning.style.display = '';
                 hideModal();
+
                 let str = marks.toString();
                 str = str.split(',').join('');
-                console.log(str);  
+                console.log(str);
 
-                //location.assign(`http://localhost:3006/login?email=${email}&&password=${password}`);
+                location.assign(`http://localhost:3006/login?rate=${str}&&name=${currentId}`);
             } else {
                 warning.style.display = 'block';
             }
@@ -96,15 +98,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     rateButtons.forEach(item => {
-        item.addEventListener('click', showModal);
+        item.addEventListener('click', () => {
+            currentId = item.id;
+            showModal()
+        });
     })
 
     document.addEventListener('keydown', (event) => {
-        if (event.code === "Escape" ) hideModal();
+        if (event.code === "Escape" ) {
+            currentId = null;
+            hideModal()
+        }
     });
 
     modal.addEventListener('click', (event) => {
-        if (event.target === modal) hideModal();
+        if (event.target === modal) {
+            currentId = null;
+            hideModal()
+        }
     })
 
     checkStars();
