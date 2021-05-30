@@ -15,15 +15,18 @@ router.get('/', (req, res) => {
 router.get('/list', (req, res) => {
     db.initPool();
     const params = req.query;
-    if(params){
+    if(params.id){
         (async () => {
+            const teachers = await db.getTeachers();
             await db.addGrades(params.id, params.grades);
-            res.sendFile(path.resolve(dirname, '../static', 'list.html'));
-
-            db.closePool();
+            res.render('teachers', { teachers });
         })();
     } else { 
-        res.sendFile(path.resolve(dirname, '../static', 'list.html'));
+        (async () => {
+            const teachers = await db.getTeachers();
+            res.render('teachers', { teachers });
+            db.closePool();
+        })();
     }
 });
 

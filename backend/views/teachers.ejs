@@ -17,22 +17,23 @@
         <div class="container">
             <div class="row">
 
-                <% teacher.forEach(function(teachers) { %>
+                <% teachers.forEach(function(teacher) { %>
                     <div class="col-md-4 offset-md-0">
                         <div class="img_wrapper">
-                            <img src="<%= photo %>" alt="photo" class="photo">
+                            <img src="<%= teacher.photo %>" alt="1" class="photo">
                         </div>                    
                         <div class="name">
-                            <%= name %>
+                            <%= teacher.fullname %>
                         </div>
                         <div class="descr">
-                            Факультет: <%= faculty %>
-                            Предмет: <%= subject %>
+                            Факультет: <%= teacher.faculty %>
+                            <br>
+                            Предмет: <%= teacher.subject %>
                         </div>
                         <div class="rank">
                             Средний рейтинг: 0
                         </div>
-                        <button class="rate">
+                        <button class="rate" id="<%= teacher.id %>"">
                             Оценить
                         </button>
                     </div>
@@ -149,7 +150,7 @@
         </div>            
     </section>
 
-
+    <script src="../../script.js"></script>
 </body>
 </html>
 
