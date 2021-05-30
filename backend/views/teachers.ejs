@@ -30,10 +30,10 @@
                             <br>
                             Предмет: <%= teacher.subject %>
                         </div>
-                        <div class="rank">
-                            Средний рейтинг: 0
+                        <div class="rank" number="<%= teacher.id %>">
+                            Просмотр рейтинга
                         </div>
-                        <button class="rate" id="<%= teacher.id %>">
+                        <button class="rate" number="<%= teacher.id %>">
                             Оценить
                         </button>
                     </div>
@@ -153,12 +153,12 @@
     <section class="rate_modal">
         <% teachers.forEach(function(teacher) { %>
             <% if (teacher.grades[0]) {%>
-            <div class="window" number="<%= teacher.id %>">
+            <div class="window window_stat" id="<%= teacher.id %>" style="display: none">
                 <div class="header">
                     Статистика
                 </div>
             
-                <% grades.forEach(function(item) { %>
+                <% teacher.grades.forEach(function(item) { %>
 
                     <div class="state"><%=item.feature%></div>
 
@@ -167,57 +167,6 @@
                     </div>
 
                 <% }); %>
-
-
-                <!-- <div class="state">Умение вызвать и поддержать интерес аудитории: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[0].grade%>
-                </div>
-
-                <div class="state">Содержательность излагаемого материала: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[1].grade%>
-                </div>
-
-                <div class="state">Актуальность материала: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[2].grade%>
-                </div>
-
-                <div class="state">Пунктуальность: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[3].grade%>
-                </div>
-
-                <div class="state">Наличие четкого РСО: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[4].grade%>
-                </div>
-
-                <div class="state">Информирование студенто: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[5].grade%>
-                </div>
-
-                <div class="state">Предоставление вопросов для зачета/экзамена: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[6].grade%>
-                </div>
-
-                <div class="state">Вежливость: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[7].grade%>
-                </div>
-
-                <div class="state">Объективность оценивания: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[8].grade%>
-                </div>
-                
-                <div class="state">Насколько вы удовлетворены преподаванием предмета?: </div>
-                <div class="stat_block">
-                    <%=teacher.grades[9].grade%>
-                </div> -->
 
             </div>
             <% } %>

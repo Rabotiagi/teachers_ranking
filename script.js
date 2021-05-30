@@ -6,8 +6,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const parentStars = document.querySelectorAll('.stars');
     const stars = document.querySelectorAll('.star');
     const warning = document.querySelector('.error');
-    let currentId;
+    let currentIndex;
     const statRow = document.querySelectorAll('.stat_block');
+    const ranks = document.querySelectorAll('.rank');
+    const rateModal = document.querySelector('.rate_modal');
 
 
     function findIndex(arr, elem) {
@@ -23,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function hideModal() {
         modal.style.display = '';
+        rateModal.style.display = '';
         document.body.style.overflow = 'auto';
     }
 
@@ -90,7 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 str = str.split(',').join('');
                 console.log(str);
 
-                location.assign(`http://localhost:3006/list?rate=${str}&&name=${currentId}`);
+                location.assign(`http://localhost:3006/list?grades=${str}&&id=${currentId}`);
             } else {
                 warning.style.display = 'block';
             }
@@ -100,31 +103,49 @@ window.addEventListener('DOMContentLoaded', () => {
 
     rateButtons.forEach(item => {
         item.addEventListener('click', () => {
-            currentId = item.id;
+            currentIndex = item.getAttribute('number');
+            console.log(currentIndex);
             showModal()
         });
     })
 
     document.addEventListener('keydown', (event) => {
         if (event.code === "Escape" ) {
-            currentId = null;
+            currentIndex = null;
             hideModal()
         }
     });
 
     modal.addEventListener('click', (event) => {
         if (event.target === modal) {
-            currentId = null;
+            currentIndex = null;
+            hideModal()
+        }
+    })
+
+    rateModal.addEventListener('click', (event) => {
+        if (event.target === rateModal) {
+            currentIndex = null;
             hideModal()
         }
     })
 
     checkStars();
 
-    
+
     statRow.forEach(row => {
         row.innerHTML = `${row.innerHTML * 100}%`;
         row.style.width = `${row.innerHTML}`;
+    })
+
+    ranks.forEach(item => {
+        item.addEventListener('click', () => {
+            const element = document.getElementById(item.getAttribute('number'));
+            console.log(element);
+            element.style.display = 'block';
+            rateModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        })
     })
 
 
