@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star');
     const warning = document.querySelector('.error');
     let currentId;
+    const statRow = document.querySelectorAll('.stat_block');
 
 
     function findIndex(arr, elem) {
@@ -89,7 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 str = str.split(',').join('');
                 console.log(str);
 
-                location.assign(`http://localhost:3006/list?grades=${str}&&id=${currentId}`);
+                location.assign(`http://localhost:3006/list?rate=${str}&&name=${currentId}`);
             } else {
                 warning.style.display = 'block';
             }
@@ -119,5 +120,12 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     checkStars();
+
+    
+    statRow.forEach(row => {
+        row.innerHTML = `${row.innerHTML * 100}%`;
+        row.style.width = `${row.innerHTML}`;
+    })
+
 
 })
