@@ -1,3 +1,4 @@
+
 \connect app
 
 CREATE TABLE Teacher(
@@ -24,10 +25,6 @@ CREATE TABLE CheckVote(
     user_email varchar(100) REFERENCES AppUser(email),
     voted integer,
     teacher_id integer REFERENCES Teacher(id)
-);
-
-CREATE TABLE Active(
-    user_email varchar(100)
 );
 
 INSERT INTO Teacher (fullname, subject, faculty, photo) values ('#1', 'Алгоритми и структуры данных', 'ФИВТ', '../static/ded.jpg');

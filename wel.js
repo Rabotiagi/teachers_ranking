@@ -4,11 +4,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const list = document.querySelector('.list_btn');
 
     login.addEventListener('click', () => {
-        location.assign(`http://localhost:3006/login`);
+        location.assign(`http://localhost:3000/login`);
     })
 
     list.addEventListener('click', () => {
-        location.assign(`http://localhost:3006/list`);
+        location.assign(`http://localhost:3000/registration`);
     })
 
 })

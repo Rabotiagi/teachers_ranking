@@ -30,10 +30,10 @@
                             <br>
                             Предмет: <%= teacher.subject %>
                         </div>
-                        <div class="rank" number="<%= teacher.id %>">
-                            Просмотр рейтинга
-                        </div>
-                        <button class="rate" number="<%= teacher.id %>">
+                        <!-- <div class="rank">
+                            Средний рейтинг: 0
+                        </div> -->
+                        <button class="rate" id="<%= teacher.id %>">
                             Оценить
                         </button>
                     </div>
@@ -153,21 +153,18 @@
     <section class="rate_modal">
         <% teachers.forEach(function(teacher) { %>
             <% if (teacher.grades[0]) {%>
-            <div class="window window_stat" id="<%= teacher.id %>" style="display: none">
+            <div class="window" number="<%= teacher.id %>">
                 <div class="header">
-                    Статистика
+                    <%= teacher.fullname%>
                 </div>
             
                 <% teacher.grades.forEach(function(item) { %>
-
+                    
                     <div class="state"><%=item.feature%></div>
-
                     <div class="stat_block">
                         <%=item.grade%>
                     </div>
-
                 <% }); %>
-
             </div>
             <% } %>
         <% }); %>

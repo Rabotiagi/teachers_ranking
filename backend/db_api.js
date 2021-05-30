@@ -1,3 +1,4 @@
+
 'use strict';
 
 import pkg from 'pg';
@@ -168,6 +169,7 @@ class DB{
         this.pool.end();
     }
 }
+
 
 
 export default DB;
