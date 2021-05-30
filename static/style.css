@@ -192,6 +192,8 @@
 }
 
 .rank {
+    text-decoration: underline;
+    cursor: pointer;
     margin-top: 10px;
     text-align: center;
     font-size: 15px;
@@ -367,4 +369,20 @@ clip-path: polygon(50% 0%, 66% 27%, 98% 35%, 76% 57%, 79% 91%, 50% 78%, 21% 91%,
     background-color: rgb(248, 126, 126);
     width: 10%;
     border-radius: 4px;
+}
+
+.window_stat {
+    display: none;
+}
+
+.rate_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .5);
+    display: none;
 }
