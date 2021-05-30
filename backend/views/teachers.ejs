@@ -33,7 +33,7 @@
                         <div class="rank">
                             Средний рейтинг: 0
                         </div>
-                        <button class="rate" id="<%= teacher.id %>"">
+                        <button class="rate" id="<%= teacher.id %>">
                             Оценить
                         </button>
                     </div>
@@ -104,7 +104,7 @@
                 <div value="5" class="star"></div>
             </div>
         
-            <div class="question">Предоставление вопросов для зачета</div>
+            <div class="question">Предоставление вопросов для зачета/экзамена</div>
             <div class="stars stars7">
                 <div value="1" class="star"></div>
                 <div value="2" class="star"></div>
@@ -148,6 +148,67 @@
                 Подтвердить
             </button>
         </div>            
+    </section>
+
+    <section class="rate_modal">
+        <% teachers.forEach(function(teacher) { %>
+            <div class="window" number="<%= teacher.id %>">
+                <div class="header">
+                    Статистика
+                </div>
+            
+                <div class="state">Умение вызвать и поддержать интерес аудитории: </div>
+                <div class="stat_block">
+                    teacher.grades[1]
+                </div>
+
+                <div class="state">Содержательность излагаемого материала: </div>
+                <div class="stat_block">
+                    teacher.grades[2]
+                </div>
+
+                <div class="state">Актуальность материала: </div>
+                <div class="stat_block">
+                    teacher.grades[3]
+                </div>
+
+                <div class="state">Пунктуальность: </div>
+                <div class="stat_block">
+                    teacher.grades[4]
+                </div>
+
+                <div class="state">Наличие четкого РСО: </div>
+                <div class="stat_block">
+                    teacher.grades[5]
+                </div>
+
+                <div class="state">Информирование студенто: </div>
+                <div class="stat_block">
+                    teacher.grades[6]
+                </div>
+
+                <div class="state">Предоставление вопросов для зачета/экзамена: </div>
+                <div class="stat_block">
+                    teacher.grades[7]
+                </div>
+
+                <div class="state">Вежливость: </div>
+                <div class="stat_block">
+                    teacher.grades[8]
+                </div>
+
+                <div class="state">Объективность оценивания: </div>
+                <div class="stat_block">
+                    teacher.grades[9]
+                </div>
+                
+                <div class="state">Насколько вы удовлетворены преподаванием предмета?: </div>
+                <div class="stat_block">
+                    teacher.grades[10]
+                </div>
+
+            </div>
+        <% }); %>
     </section>
 
     <script src="../../script.js"></script>

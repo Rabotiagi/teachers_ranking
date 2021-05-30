@@ -18,7 +18,10 @@ router.get('/list', (req, res) => {
     if(params.id){
         (async () => {
             const teachers = await db.getTeachers();
-            
+            for(let i = 0; i < teachers.length; i++){
+                teachers[i].grades = await db.getVotes(i + 1);
+            }
+
             const points = params.grades.split('');
             for(let i = 0; i < points.length; i++){
                 points[i] = +points[i];
@@ -31,6 +34,9 @@ router.get('/list', (req, res) => {
     } else { 
         (async () => {
             const teachers = await db.getTeachers();
+            for(let i = 0; i < teachers.length; i++){
+                teachers[i].grades = await db.getVotes(i + 1);
+            }
             res.render('teachers', { teachers });
             db.closePool();
         })();
