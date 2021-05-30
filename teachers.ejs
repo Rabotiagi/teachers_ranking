@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="bootstrap-grid.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="list">
+        <img src="logo.png" alt="fair_point" class="list_logo">
+        <div class="container">
+            <div class="row">
+
+                <% teacher.forEach(function(teachers) { %>
+                    <div class="col-md-4 offset-md-0">
+                        <div class="img_wrapper">
+                            <img src="<%= photo %>" alt="photo" class="photo">
+                        </div>                    
+                        <div class="name">
+                            <%= name %>
+                        </div>
+                        <div class="descr">
+                            Факультет: <%= faculty %>
+                            Предмет: <%= subject %>
+                        </div>
+                        <div class="rank">
+                            Средний рейтинг: 0
+                        </div>
+                        <button class="rate">
+                            Оценить
+                        </button>
+                    </div>
+                <% }); %>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="modal">
+        <div class="window">
+            <div class="who">
+                Сергиенко Анатолий Михайлович
+            </div>
+
+            <div class="question">Умение вызвать и поддержать интерес аудитории</div>
+            <div class="stars stars1">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+            <div class="question">Содержательность излагаемого материала</div>
+            <div class="stars stars2">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+    
+            <div class="question">Актуальность материала</div>
+            <div class="stars stars3">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+            <div class="question">Пунктуальность</div>
+            <div class="stars stars4">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+            <div class="question">Наличие четкого РСО</div>
+            <div class="stars stars5">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+            <div class="question">Информирование студентов</div>
+            <div class="stars stars6">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+            <div class="question">Предоставление вопросов для зачета</div>
+            <div class="stars stars7">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+            <div class="question">Вежливость</div>
+            <div class="stars stars8">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+            <div class="question">Объективность оценивания</div>
+            <div class="stars stars9">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+        
+            <div class="question">Насколько вы удовлетворены преподаванием предмета?</div>
+            <div class="stars stars10 stars_last">
+                <div value="1" class="star"></div>
+                <div value="2" class="star"></div>
+                <div value="3" class="star"></div>
+                <div value="4" class="star"></div>
+                <div value="5" class="star"></div>
+            </div>
+            
+            <div class="error">
+                Пожалуйста заполните все данные
+            </div>
+
+            <button class="confirm_modal">
+                Подтвердить
+            </button>
+        </div>            
+    </section>
+
+
+</body>
+</html>
+
+

@@ -316,8 +316,8 @@ pointer-events: auto;
 .star {
 display: inline-block;
 vertical-align: top;
-width: 20px;
-height: 20px;
+width: 22px;
+height: 22px;
 background: rgb(194, 194, 194);
 position: relative;
 }
@@ -341,4 +341,8 @@ clip-path: polygon(50% 0%, 66% 27%, 98% 35%, 76% 57%, 79% 91%, 50% 78%, 21% 91%,
 
 .stars_last {
     margin-bottom: 25px;
+}
+
+.golden {
+    background: rgb(255, 186, 82);
 }

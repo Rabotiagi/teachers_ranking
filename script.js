@@ -1,7 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
 
-    const qwe = ['anat', 'ole', 'rnb'];
-
     const modal = document.querySelector('.modal');
     const confirmButton = document.querySelector('.confirm_modal');
     const rateButtons = document.querySelectorAll('.rate');
@@ -9,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star');
     const warning = document.querySelector('.error');
 
-    
+
     function findIndex(arr, elem) {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === elem) return i
@@ -17,7 +15,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function showModal() {
-        //console.log(qwe[i]);
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
@@ -34,37 +31,33 @@ window.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('mouseover', () => {
                 let value = item.getAttribute('value');
 
-                item.style.background = 'rgb(255, 186, 82)';
+                item.classList.add('golden');
 
                 let parent = item.parentNode;
                 let children = parent.querySelectorAll('.star');
 
                 children.forEach(content => {                    
                     if (content.getAttribute('value') < value) {
-                        content.style.background = 'rgb(255, 186, 82)';
+                        content.classList.add('golden');
                     }                  
                 })
             })
-        })
 
-        stars.forEach(item => {
             item.addEventListener('mouseout', () => {
                 let value = item.getAttribute('value');
 
-                item.style.background = 'rgb(194, 194, 194)';
+                item.classList.remove('golden');
             
                 let parent = item.parentNode;
                 let children = parent.querySelectorAll('.star');
 
                 children.forEach(content => {
                     if (content.getAttribute('value') < value) {
-                        content.style.background = 'rgb(194, 194, 194)';
+                        content.classList.remove('golden');
                     }
                 })
             })
-        })
 
-        stars.forEach(item => {
             item.addEventListener('click', () => {
                 let value = item.getAttribute('value');
                 let parent = item.parentNode;
@@ -74,11 +67,13 @@ window.addEventListener('DOMContentLoaded', () => {
                 marks[index] = value;
                 
                 item.style.background = 'rgb(255, 186, 82)';
-                parent.style.pointerEvents = 'none';
+                //parent.style.pointerEvents = 'none';
 
                 children.forEach(content => {
-                    if (content.getAttribute('value') < value) {
+                    if (content.getAttribute('value') <= value) {
                         content.style.background = 'rgb(255, 186, 82)';
+                    } else {
+                        content.style.background = 'rgb(194, 194, 194)';
                     }
                 })     
             })
@@ -88,7 +83,11 @@ window.addEventListener('DOMContentLoaded', () => {
             if (findIndex(marks, 0) === undefined) {
                 warning.style.display = '';
                 hideModal();
-                console.log(marks);  
+                let str = marks.toString();
+                str = str.split(',').join('');
+                console.log(str);  
+
+                //location.assign(`http://localhost:3006/login?email=${email}&&password=${password}`);
             } else {
                 warning.style.display = 'block';
             }
